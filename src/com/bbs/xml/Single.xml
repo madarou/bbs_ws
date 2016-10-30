@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.SingleMapper">
+  <select id="getSinglePic" resultType="Map" parameterType="Map">
+		select content
+		from single_pic
+		where id=#{id} and source=#{source} and pic_id=#{picid}
+  </select>
+  <select id="getSingleList" resultType="Map" parameterType="Map">
+		select id,source,title,pic_tag,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time
+		from single
+		<if test="source!= null">
+   		where source=#{source}
+  		</if>
+  		order by time desc
+		limit #{start},#{end}
+  </select>
+  <select id="getSingleListWithContent" resultType="Map" parameterType="Map">
+		select id,source,title,pic_tag,left(content,200) as content,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time
+		from single
+		<if test="source!= null">
+   		where source=#{source}
+  		</if>
+  		order by time desc
+		limit #{start},#{end}
+  </select>
+  <select id="getSingleCnt" resultType="Map" parameterType="Map">
+		select count(1) as cnt
+		from single
+		<if test="source!= null">
+   		where source=#{source}
+  		</if>
+  </select>
+  <select id="getSinglePicAddr" resultType="String" parameterType="Map">
+		select concat('rest/single/img/',source,'/',id,'/',pic_id) as addr
+		from single_pic
+		where id=#{id} and source=#{source}
+  </select>
+  <select id="getMessage" resultType="Map" parameterType="Map">
+		select content,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time
+		from single
+		where id=#{id} and source=#{source}
+  </select>
+  <select id="search" resultType="Map" parameterType="list">
+		select id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source
+		from single
+		where
+		<foreach collection="list" item="keyword" open="("
+    	separator="or" close=")">
+   		title like CONCAT(CONCAT('%',#{keyword}),'%')
+  		</foreach>
+  </select>
+</mapper>

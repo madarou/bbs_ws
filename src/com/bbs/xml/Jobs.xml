@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.JobsMapper">
+  <select id="getJobsList" resultType="Map" parameterType="Map">
+		select seq as id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source,jobtype
+		from job
+		where isdelete=0
+		<if test="source!= null">
+   		  and source=#{source}
+  		</if>
+  		<if test="jobtype!='ALL'">
+   		  and jobtype!=#{jobtype}
+  		</if>
+  		order by time desc
+		limit #{start},#{end}
+  </select>
+  <select id="getUserJobsList" resultType="Map" parameterType="Map">
+		select j.seq as id,title,DATE_FORMAT(j.time,'%Y-%m-%d %H:%i:%S') as time,j.source,j.jobtype,case when f.uid is null then 'N' else 'Y' end as save
+		from job j
+		left join favorite f
+		on j.seq=f.jobseq and f.uid=#{uid}
+		where j.isdelete=0
+		<if test="source!= null">
+   		  and j.source=#{source}
+  		</if>
+  		<if test="jobtype!='ALL'">
+   		  and j.jobtype!=#{jobtype}
+  		</if>
+  		order by j.time desc
+		limit #{start},#{end}
+  </select>
+  <select id="getUserSavedJobIds" resultType="int" parameterType="long">
+		select jobseq as seq
+		from favorite
+		where uid=#{uid}
+  </select>
+  <select id="getJobsCnt" resultType="Map" parameterType="Map">
+		select count(1) as cnt
+		from job
+		where isdelete=0
+		<if test="source!= null">
+   		  and source=#{source}
+  		</if>
+  		<if test="jobtype!='ALL'">
+   		  and jobtype!=#{jobtype}
+  		</if>
+  </select>
+  <select id="getJobDetail" resultType="Map" parameterType="Map">
+		select title,content,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,jobtype
+		from job
+		where seq=#{id}
+  </select>
+  <select id="search" resultType="Map" parameterType="Map">
+		select seq as id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source
+		from job
+		where 
+		<if test="source!= null">
+   		 source=#{source} and
+  		</if>
+		<foreach collection="list" item="keyword" open="("
+    	separator="or" close=")">
+   		title like CONCAT(CONCAT('%',#{keyword}),'%')  
+  		</foreach>
+  		order by time desc
+  		limit #{start,jdbcType=INTEGER},#{end,jdbcType=INTEGER}
+  </select>
+  <select id="loginSearch" resultType="Map" parameterType="Map">
+		select j.seq as id,title,DATE_FORMAT(j.time,'%Y-%m-%d %H:%i:%S') as time,j.source,case when f.uid is null then 'N' else 'Y' end as save
+		from job j
+		left join favorite f
+		on j.seq=f.jobseq and f.uid=#{uid}
+		where
+		<if test="source!= null">
+   		j.source=#{source} and
+  		</if>
+  		<foreach collection="list" item="keyword" open="("
+    	separator="or" close=")">
+   		title like CONCAT(CONCAT('%',#{keyword}),'%')  
+  		</foreach>
+  		order by time desc
+  		limit #{start},#{end}
+  </select>
+  <select id="searchcount" resultType="Map" parameterType="Map">
+		select count(1) as cnt
+		from job
+		where 
+		<if test="source!= null">
+   		 source=#{source} and
+  		</if>
+		<foreach collection="list" item="keyword" open="("
+    	separator="or" close=")">
+   		title like CONCAT(CONCAT('%',#{keyword}),'%')  
+  		</foreach>
+  </select>
+</mapper>

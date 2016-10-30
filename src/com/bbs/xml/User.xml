@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bbs.mapper.UserMapper">
+  <select id="getUserInfo" resultType="com.bbs.bean.User" parameterType="Map">
+		select *
+		from mapuser
+		where uid=#{uid} and type=#{type}
+  </select>
+  <insert id="addUser" parameterType="com.bbs.bean.User">
+  	INSERT INTO mapuser(uid,type,username,createtime,headurl,accesstoken)
+  	values(#{uid},#{type},#{username},sysdate(),#{headurl},#{accesstoken})
+  </insert>
+  <insert id="addFavorite" parameterType="Map">
+  	INSERT INTO favorite(uid,jobseq,time,type)
+  	values(#{uid},#{id},sysdate(),#{type})
+  </insert>
+  <select id="getJobFavList" resultType="Map" parameterType="Map">
+  	select j.seq as id,j.title,DATE_FORMAT(j.time,'%Y-%m-%d %H:%i:%S') as time,j.source
+	from bbs.favorite f
+	join bbs.job j
+	on f.jobseq=j.seq
+	where uid=#{uid}
+	limit #{start},#{end}
+  </select>
+  <select id="getJobFavCnt" resultType="Map" parameterType="Map">
+  	select count(*) as cnt
+	from bbs.favorite f
+	join bbs.job j
+	on f.jobseq=j.seq
+	where uid=#{uid}
+  </select>
+  <delete id="removeFavorite" parameterType="Map">
+  	delete from favorite
+    where uid=#{uid} 
+      and jobseq=#{id}
+  </delete>
+  <insert id="updatekey" parameterType="Map">
+  	update mapuser
+	set searchkey=#{keys}
+  	where uid=#{uid}
+  </insert>
+</mapper>
