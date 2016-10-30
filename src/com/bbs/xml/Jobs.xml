@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bbs.mapper.JobsMapper">
   <select id="getJobsList" resultType="Map" parameterType="Map">
-		select seq as id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source,jobtype
+		select id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source,jobtype
 		from job
 		where isdelete=0
 		<if test="source!= null">
@@ -50,7 +50,7 @@
   <select id="getJobDetail" resultType="Map" parameterType="Map">
 		select title,content,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,jobtype
 		from job
-		where seq=#{id}
+		where id=#{id} and source=#{source}
   </select>
   <select id="search" resultType="Map" parameterType="Map">
 		select seq as id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source

@@ -1,8 +1,8 @@
-<!-- <urlrewrite> -->
-<!-- <rule> -->
-<!--     <name>Domain Name Check for 4jobs.me</name> -->
-<!--     <condition name="host" operator="equal">^4jobs.me</condition> -->
-<!--     <from>^(.*)$</from> -->
-<!--     <to type="redirect">http://www.4jobs.me$1</to> -->
-<!-- </rule> -->
-<!-- </urlrewrite> -->
+<urlrewrite>
+<rule>
+    <name>Domain Name Check for 4jobs.me</name>
+    <condition name="host" operator="equal">^4jobs.me</condition>
+    <from>^(.*)$</from>
+    <to type="redirect">http://www.4jobs.me$1</to>
+</rule>
+</urlrewrite>
