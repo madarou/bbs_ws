@@ -1,0 +1,112 @@
+<html lang="zh-CN"><head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>4Jobs.me - 让天下没有难找的工作 | 找工作 | 找实习</title>
+
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+	<script src="js/post.js"></script>
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" href="index.min.css">
+
+	<style>
+	body{
+		background:#999;
+	}
+	.modal-right-home{
+		padding:7px;
+		width:100%;
+		margin-top: 50px;
+	}
+	.modal-right-home a{
+		width:100%;
+	}
+	</style>
+</head>
+
+<body>
+
+	
+
+
+	<div class="modal jobPostModal" id="myModal">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content myModelContent" >
+	
+			<div class="modal-header">
+	          <h4 class="modal-title" id="myLargeModalLabel">Title</h4>
+			</div>
+	        <div class="modal-body">
+				Content
+	        </div>
+			
+	    </div>
+		<div class="modal-right">
+			<div class="modal-right-header">
+				<div class="modal-right-header-img">
+				</div>
+				<div class="modal-right-header-info">
+					<span class="modal-right-header-s">source</span>
+					<span class="modal-right-header-t">time</span>
+				</div>
+				
+				<div class="modal-right-share">
+					<span class="share-span">分享到：</span>
+					<a href="javascript:void(0)" onclick="share('qzone')" title="分享到QQ空间" class="m-bshare-qzone"></a>
+					<a href="javascript:void(0)" onclick="share('sinaminiblog')" title="分享到新浪微博" class="m-bshare-sinaminiblog"></a>
+					<a href="javascript:void(0)" onclick="share('renren')" title="分享到人人网" class="m-bshare-renren"></a>
+					<a href="javascript:void(0)" onclick="share('qqmb')" title="分享到腾讯微博" class="m-bshare-qqmb"></a>
+					<a href="javascript:void(0)" onclick="share('weixin')" title="分享到微信" class="m-bshare-weixin"></a>
+				</div>
+				
+				<div class="modal-right-url">
+					<span class="share-span">地址：</span>
+					<a href="#" ></a>
+				</div>
+				<div style="display:none" class="modal-fav">
+					<a onclick="addFavJob()" class="modal-fav-add" href="javascript:void(0)"> 
+					<span class="modal-fav-t">添加到收藏 </span>
+					<span class="glyphicon glyphicon-star"></span>
+					</a>
+				</div>
+				<div class="modal-right-home">
+					<a href="index.html" type="button" class="btn btn-info">返回首页</a>
+				</div>
+				
+			</div>
+		</div>
+		    
+	  </div>
+	</div>
+<script>
+$(document).ready(function(){
+
+	var source=getUrlParam('source');
+	var id=getUrlParam('id');
+	if(source==null||id==null){
+		//error 404
+		location.href='404.html';
+	}else{
+		getJob(id,source);
+	}
+
+	$('.jobPostModal').css('display','block');
+});
+
+</script>
+
+
+
+
+
+</body>
+</html>

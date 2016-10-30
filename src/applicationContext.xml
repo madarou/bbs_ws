@@ -35,62 +35,62 @@
         <property name="mapperInterface" value="com.bbs.mapper.SubscribeMapper"></property>
         <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
     </bean>
-    <bean id="quartzJob" class="com.bbs.subscribe.SubscribeJob">
-         <property name="mailSender">
-             <ref bean="mailSender"/>
-         </property>
-         <property name="subscribeDao">
-             <ref bean="subscribeDao"/>
-         </property>    
-         <property name="mailsubject" value="职位订阅"/>
+<!--     <bean id="quartzJob" class="com.bbs.subscribe.SubscribeJob"> -->
+<!--          <property name="mailSender"> -->
+<!--              <ref bean="mailSender"/> -->
+<!--          </property> -->
+<!--          <property name="subscribeDao"> -->
+<!--              <ref bean="subscribeDao"/> -->
+<!--          </property>     -->
+<!--          <property name="mailsubject" value="职位订阅"/> -->
            
-    </bean>
-	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-         <property name="targetObject">
-             <ref bean="quartzJob"/>
-         </property>
-         <property name="targetMethod">  <!-- 要执行的方法名称 -->  
-	        <value>execute</value>  
-	     </property> 
-	     <property name="arguments">
-             <list>
-                 <value>1</value><!-- 发邮件的线程数 -->  
-                 <value>10</value><!-- 订阅返回的记录数-->
-                 <value>http://www.4jobs.me</value><!-- 链接的hostname--> 
-            </list>
-         </property>
-    </bean>
-    <!-- 定义触发时间 -->
-    <bean id="workTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
-        <property name="jobDetail">
-            <ref bean="jobtask"/>
-        </property>
-        <!-- cron表达式 -->
-        <property name="cronExpression" value="0 0 23 * * ?"/>
-    </bean>
-	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="triggers">
-            <list>
-                <ref bean="workTime"/>
-            </list>
-        </property>
-    </bean>
-	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
-        <property name="host" value="smtp.exmail.qq.com" />
-        <property name="username" value="jobs@4jobs.me" />
-        <property name="password" value="seed2014" />
-        <property name="javaMailProperties">
-			<props>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.timeout">25000</prop>
-            </props>
-        </property>
-	</bean>
-	<bean class="com.bbs.subscribe.MailValidate">
-        <property name="mailSender">
-            <ref bean="mailSender"/>
-        </property>
-	</bean>
+<!--     </bean> -->
+<!-- 	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!--          <property name="targetObject"> -->
+<!--              <ref bean="quartzJob"/> -->
+<!--          </property> -->
+<!--          <property name="targetMethod">  要执行的方法名称   -->
+<!-- 	        <value>execute</value>   -->
+<!-- 	     </property>  -->
+<!-- 	     <property name="arguments"> -->
+<!--              <list> -->
+<!--                  <value>1</value>发邮件的线程数   -->
+<!--                  <value>10</value>订阅返回的记录数 -->
+<!--                  <value>http://www.4jobs.me</value>链接的hostname  -->
+<!--             </list> -->
+<!--          </property> -->
+<!--     </bean> -->
+<!--     定义触发时间 -->
+<!--     <bean id="workTime" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+<!--         <property name="jobDetail"> -->
+<!--             <ref bean="jobtask"/> -->
+<!--         </property> -->
+<!--         cron表达式 -->
+<!--         <property name="cronExpression" value="0 0 23 * * ?"/> -->
+<!--     </bean> -->
+<!-- 	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> -->
+<!--         <property name="triggers"> -->
+<!--             <list> -->
+<!--                 <ref bean="workTime"/> -->
+<!--             </list> -->
+<!--         </property> -->
+<!--     </bean> -->
+<!-- 	<bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" > -->
+<!--         <property name="host" value="smtp.exmail.qq.com" /> -->
+<!--         <property name="username" value="jobs@4jobs.me" /> -->
+<!--         <property name="password" value="seed2014" /> -->
+<!--         <property name="javaMailProperties"> -->
+<!-- 			<props> -->
+<!--                 <prop key="mail.smtp.auth">true</prop> -->
+<!--                 <prop key="mail.smtp.timeout">25000</prop> -->
+<!--             </props> -->
+<!--         </property> -->
+<!-- 	</bean> -->
+<!-- 	<bean class="com.bbs.subscribe.MailValidate"> -->
+<!--         <property name="mailSender"> -->
+<!--             <ref bean="mailSender"/> -->
+<!--         </property> -->
+<!-- 	</bean> -->
     <bean class="com.bbs.service.Jobs"/>
     <bean class="com.bbs.service.Single"/>  
     <bean class="com.bbs.service.User"/>

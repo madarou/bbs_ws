@@ -1,0 +1,215 @@
+<html lang="zh-CN"><head>
+<meta name="baidu-site-verification" content="tIzMhveuFo" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>4Jobs.me</title>
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- 可选的Bootstrap主题文件（一般不用引入） -->
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+	<script src="js/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+	<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+	
+	<script src="js/joblove.js"></script>
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	<link rel="stylesheet" href="index.css">
+<body>
+
+	<div class="myrow">
+		
+
+		<div class="sidebar">
+			<div  class="mylogo">
+				<p><span class="mylogo-p-1">4</span><span class="mylogo-p-2">jobs</span>.<span class="mylogo-p-3">me</span></p>
+				<!--<span>让天下没有难找的工作</span>-->
+			</div>
+			
+			<div  class="login-btn">
+				<a class="login-rr-logo" href="/login?type=renren"><img style="border:0px" src="img/renren_login.png"></a>
+				<a class="login-rr-logo" href="/login?type=weibo"><img style="border:0px" src="img/weibo_login.png"></a>	
+			</div>
+			
+			<div style="display:none" class="login-info">
+				<div class="login-info-img">
+					<img src="http://head.xiaonei.com/photos/0/0/men_main.gif" />
+				</div>
+				<span class="login-info-name"></span>
+				<a class="login-out" href="/logout">退出登录</a>
+				<div class="login-fav">
+					<a onclick="initFavList()" href="javascript:void(0)" class="login-fav-box">
+					<span class="login-fav-btn" >收藏</span>
+					<span class="login-fav-r glyphicon glyphicon-chevron-right"></span>
+					</a>
+					<div style="display:none" class="job-fav-list">
+						<div class="job-fav-l-box">
+						<table class="table table-hover">
+						</table>
+						<a class="jov-fav-more" onclick="getJobFavList()" href="javascript:void(0)">加载更多...</a>
+					</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="c_left_source">
+				<ul class="list-inline page-header">
+				  <li><h4 class="">Source: </h4></li>
+				  <li>
+				  <button type="button" class="btn btn-default btn-sm active btn-s-all">
+				  <span class="glyphicon glyphicon-ok-circle"></span> 全选</button>
+				  </li>
+				</ul>
+
+				<div class="table-responsive">
+		            <table class="table table-condensed">
+		              <tbody>
+		                <tr>
+		                  <td>
+		                  	<button type="button" class="btn btn-success btn-sm btn-block btn-s-fd">
+		                  		<span style="display:none" class="glyphicon glyphicon-ok"></span> 复旦日月光华
+		                  	</button>
+		                  </td>
+		                  <td><button type="button" class="btn btn-danger btn-sm btn-block btn-s-qh">
+		                  <span style="display:none" class="glyphicon glyphicon-ok"></span>清华水木社区</button></td>
+		                </tr>
+		                <tr>
+		                  <td><button type="button" class="btn btn-warning btn-sm btn-block btn-s-sj">
+		                  <span style="display:none" class="glyphicon glyphicon-ok"></span>交大饮水思源</button></td>
+		                  <td><button type="button" class="btn btn-default btn-sm btn-block btn-s-bd">
+		                  <span style="display:none" class="glyphicon glyphicon-ok"></span>北大未名社区</button></td>
+		                </tr>
+
+		              </tbody>
+		            </table>
+	            </div>
+			</div>
+			<div class="c_left_keys">
+				<h4 class="page-header">Search: </h4>
+				<div class="key-search">
+					<div class="input-group">
+				      <input type="text" class="form-control search-val">
+				      <span class="input-group-btn">
+				        <button onclick='runKeyFilter()' class="btn btn-default" type="button">搜索</button>
+				      </span>
+				    </div><!-- /input-group -->
+				</div>		
+			</div>
+		
+		</div>
+
+		<div class="main">
+			<div class="top_nav">
+				
+			</div>
+
+			<div class="job_table">
+            <table class=" table-hover">
+              
+            </table>
+          </div><!--end table-->
+
+
+		</div>
+
+
+	    <div class="nav_pages">
+	        <ul class="pagination">
+				  <li class="pre disabled"><a onclick='prePage()' href="javascript:void(0)">上一页</a></li>
+				  <li><a onclick='firstPage()'href="javascript:void(0)">首页</a></li>
+				  <li class="next"><a onclick='nextPage()' href="javascript:void(0)">下一页</a></li>
+			</ul>
+		</div>	
+
+		<div class="right-nav">
+			<ul>
+				<li class="right-nav-1"><a href="#">
+				  <span>J</span>
+				  <span>O</span>
+				  <span>B</span>
+				</a></li>
+				<li class="right-nav-2">
+				<a href="love.html">
+				  <span>L</span>
+				  <span>o</span>
+				  <span>v</span>
+				  <span>e</span>
+				</a></li>
+			</ul>
+		</div>
+
+	</div><!--row end-->
+	<div class="modal fade bs-example-modal-lg" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-lg">
+	    <div class="modal-content myModelContent" >
+	
+			<div class="modal-header">
+	          <h4 class="modal-title" id="myLargeModalLabel">Title</h4>
+			</div>
+	        <div class="modal-body">
+				Content
+	        </div>
+			
+	
+	    </div>
+		<div class="modal-right">
+			<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+			<div class="modal-right-header">
+				<div class="modal-right-header-img">
+				</div>
+				<div class="modal-right-header-info">
+					<span class="modal-right-header-s">source</span>
+					<span class="modal-right-header-t">time</span>
+				</div>
+				
+				<div class="modal-right-share">
+					<span class="share-span">分享到：</span>
+					<a href="javascript:void(0)" onclick="share('qzone')" title="分享到QQ空间" class="m-bshare-qzone"></a>
+					<a href="javascript:void(0)" onclick="share('sinaminiblog')" title="分享到新浪微博" class="m-bshare-sinaminiblog"></a>
+					<a href="javascript:void(0)" onclick="share('renren')" title="分享到人人网" class="m-bshare-renren"></a>
+					<a href="javascript:void(0)" onclick="share('qqmb')" title="分享到腾讯微博" class="m-bshare-qqmb"></a>
+					<a href="javascript:void(0)" onclick="share('weixin')" title="分享到微信" class="m-bshare-weixin"></a>
+				</div>
+				<div class="modal-right-url">
+					<span class="share-span">地址：</span>
+					<a href="#" target="_blank"></a>
+				</div>
+				<div style="display:none" isSave='' class="modal-fav">
+					<a onclick="changeJobPostFav()" class="modal-fav-add" href="javascript:void(0)"> 
+					<span class="modal-fav-t">添加到收藏 </span>
+					<span class="glyphicon glyphicon-star"></span>
+					</a>
+				</div>
+	
+			</div>
+		</div>
+		    
+	  </div>
+	</div>
+<script>
+//$('#myModal').modal('show');
+init(0);
+initJobs('');
+</script>
+
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F7997a1420592d3738f3ed307b9468170' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<script type="text/javascript">
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3Ff6ef3da84892082b12af7539158eedde' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+</body>
+</html>
