@@ -7,7 +7,7 @@
 		select id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source,jobtype
 		from job
 		where isdelete=0
-		<if test="source!= null">
+		<if test="source!= null and source!=''">
    		  and source=#{source}
   		</if>
   		<if test="jobtype!='ALL'">
@@ -22,7 +22,7 @@
 		left join favorite f
 		on j.seq=f.jobseq and f.uid=#{uid}
 		where j.isdelete=0
-		<if test="source!= null">
+		<if test="source!= null and source!=''">
    		  and j.source=#{source}
   		</if>
   		<if test="jobtype!='ALL'">
