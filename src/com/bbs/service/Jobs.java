@@ -15,6 +15,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import org.apache.log4j.Logger;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.bbs.bean.QueryResult;
@@ -27,6 +28,7 @@ import com.bbs.util.QueryUtils;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class Jobs {
+	private Logger logger = Logger.getLogger(Jobs.class);
 	private @Context HttpServletRequest request;
 	@Autowired
     private JobsMapper jobsDao;
@@ -35,6 +37,7 @@ public class Jobs {
 	@GET
 	@Path("getlist")
 	public Map getJobList(@QueryParam("start")int start,@QueryParam("end")int end,@QueryParam("source") String source,@QueryParam("jobtype") String jobtype){
+		logger.info("===来自ip: "+getRemoteHost()+"===");
 		Map reMap=new HashMap();
 		Map<String,Object> para=new HashMap();
 		para.put("start", start);
@@ -99,5 +102,19 @@ public class Jobs {
 			favset=jobsDao.getUserSavedJobIds(((com.bbs.bean.User)user).getUid());
 		}
 		return q.query(page, pageSize, decodekey, source, orderby_int, timeto_int,favset,jobtype);
+	}
+	
+	private String getRemoteHost(){
+	    String ip = request.getHeader("x-forwarded-for");
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getRemoteAddr();
+	    }
+	    return ip.equals("0:0:0:0:0:0:0:1")?"127.0.0.1":ip;
 	}
 }

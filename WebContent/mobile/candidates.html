@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+	<meta http-equiv="Access-Control-Allow-Origin" content="http://www.yuqq.cc">
+    <title>聚点job</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/jquery.mmenu.all.css" />
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"> -->
+    <style type="text/css">
+    
+/*     #o-person-details-pane{
+    position: absolute;
+    left: 0;
+    top: 50px;
+    bottom: 50px;
+    width: 100%;
+    background-color: #fafafa;
+    z-index: 10;
+} */
+    	#pullDown, #pullUp {
+    background:#fff;
+    height:40px;
+    line-height:40px;
+    padding:5px 10px;
+    border-bottom:1px solid #ccc;
+    font-weight:bold;
+    font-size:14px;
+    color:#888;
+}
+#pullDown .pullDownIcon, #pullUp .pullUpIcon  {
+    display:block; float:left;
+    width:40px; height:40px;
+    background:url(img/pull-icon@2x.png) 0 0 no-repeat;
+    -webkit-background-size:40px 80px;
+    background-size:40px 80px;
+    -webkit-transition-property:-webkit-transform;
+    -webkit-transition-duration:250ms;
+}
+#pullDown .pullDownIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+#pullUp .pullUpIcon  {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullDown.flip .pullDownIcon {
+    -webkit-transform:rotate(-180deg) translateZ(0);
+}
+
+#pullUp.flip .pullUpIcon {
+    -webkit-transform:rotate(0deg) translateZ(0);
+}
+
+#pullDown.loading .pullDownIcon, #pullUp.loading .pullUpIcon {
+    background-position:0 100%;
+    -webkit-transform:rotate(0deg) translateZ(0);
+    -webkit-transition-duration:0ms;
+    
+    -webkit-animation-name:loading;
+    -webkit-animation-duration:2s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+}
+
+@-webkit-keyframes loading {
+    from { -webkit-transform:rotate(0deg) translateZ(0); }
+    to { -webkit-transform:rotate(360deg) translateZ(0); }
+}
+    </style>              
+  </head>
+  <body class="o-page p-about">
+  <!-- Menu navigation -->
+			<nav id="menu" class="mm-menu mm-horizontal mm-ismenu mm-top mm-front mm-current mm-opened">
+				<ul id="menu-ul">
+					<li>
+						<a href="/index">
+							<i class="fa fa-home"></i>Home
+						</a>
+					</li>
+					<li class="Selected">
+						<a href="about.html">
+							<i class="fa fa-users"></i>About
+						</a>
+					</li>
+					<li>
+						<a href="blog.html">
+							<i class="fa fa-pencil-square-o"></i>Blog
+						</a>
+					</li>
+					<li>
+						<a href="gallery.html">
+							<i class="fa fa-picture-o"></i>Gallery
+						</a>
+					</li>
+					<li>
+						<a href="products.html">
+							<i class="fa fa-th-list"></i>Products
+						</a>
+					</li>
+					<li>
+						<a href="/templates/slide.html">
+							<i class="fa fa-list-alt"></i>Shortcodes
+						</a>
+					</li>
+					<li>
+						<a href="/templates/fullpage.html">
+							<i class="fa fa-envelope"></i>确定
+						</a>
+					</li>
+				</ul>
+				<!-- <a class="menu-btn2"></a> -->
+				<!-- <div style="text-align:center;top: 85%;left: 45.5%;position: absolute"><a class="menu-btn2"></a></div> -->
+			</nav>
+			
+		<div id="page">
+			<a name="top"></a>
+			<div id="header" class="height_1">
+				<div class="header-content">
+					<!-- <a href="javascript:history.back();" class="p-link-back"><i class="fa fa-arrow-left"></i></a> -->
+					<!-- <a class="menu-btn"></a> --><span style="font-size: 20px;font-weight: bold;color: white;">聚点job</span>
+					<a href="candidates.html" class="p-link-home"><i class="fa fa-home"></i></a>
+				</div>
+			</div>
+			<div class="bannerPane">
+				<div class="overlay"></div>
+				<div class="s-banner-content">
+					<div>
+						<a href="#" id="part-load" class="o-buttons" style="background:#27c181;border-radius: 30px;"><i class="fa fa-github-alt"></i>兼职/实习</a>
+						<a href="#" id="all-load" class="o-buttons b-bigger" style="background:#8c0707;border-radius: 30px;"><i class="fa fa-home"></i>所有类型</a>
+						<a href="#" id="full-load" class="o-buttons" style="background:#EA2424;border-radius: 30px;"><i class="fa fa-suitcase"></i> 全职工作</a>
+					</div>
+				</div>
+			</div>
+			<div id="content">
+				
+				<div id="o-person-details-pane">
+					<div id="scroller" class="o-person-details">
+							<div class="o-team">
+							</div>
+							<div id="pullUp" style="text-align: center;">
+								<span class="pullUpIcon"></span><span class="pullUpLabel">上拉加载更多...</span>
+							</div>
+					</div>
+					
+				</div>
+				<div id="job-detail">
+					<div id="job-detail-header">
+						<div style="font-size: 20px;padding-top: 20px;color:white;font-weight: bold;" id="detail-title">职位详情</div>
+						<div class="header-content">
+							<a href="javascript:history.back();" class="hidejob"><i class="fa fa-arrow-left"></i></a>
+						</div>
+					</div>
+					<div class="bannerPane">
+						<div class="overlay"></div>
+					</div>
+					<div id="job-detail-ct">
+						
+					</div>
+				</div>
+			</div>
+			<p id="back-to-top">
+				<a href="#top" id="bt"><i class="fa fa-arrow-circle-o-up fa-2x" style="color:black"></i></a>
+			</p>
+			<div class="subFooter">Copyright 2016. All rights reserved.</div>
+			
+		</div>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/fx.js"></script>
+	<script src="js/fx_methods.js"></script>
+	<script src="js/zepto.scroll.js"></script>
+    <script src="js/slideUpDown.js"></script>
+	<script type="text/javascript" src="js/scroll.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/candidates.js"></script>
+  </body>
+</html>
