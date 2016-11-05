@@ -7,9 +7,23 @@
 		select id,title,DATE_FORMAT(time,'%Y-%m-%d %H:%i:%S') as time,source,jobtype
 		from job
 		where isdelete=0
-		<if test="source!= null and source!=''">
-   		  and source=#{source}
+		<if test="source=='WEST'">
+   		  and source in 
+   		  	 <foreach item="item" index="index" collection="WEST"
+                      open="(" separator="," close=")">
+                 #{item}
+             </foreach>
   		</if>
+  		<if test="source=='EAST'">
+   		  and source in 
+			 <foreach item="item" index="index" collection="EAST"
+                      open="(" separator="," close=")">
+                 #{item}
+             </foreach>
+  		</if>
+<!-- 		<if test="source!= null and source!=''"> -->
+<!--    		  and source=#{source} -->
+<!--   		</if> -->
   		<if test="jobtype!='ALL'">
    		  and jobtype!=#{jobtype}
   		</if>

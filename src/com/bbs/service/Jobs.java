@@ -1,8 +1,11 @@
 package com.bbs.service;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Array;
 import java.net.URLDecoder;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -30,6 +33,8 @@ import com.bbs.util.QueryUtils;
 public class Jobs {
 	private Logger logger = Logger.getLogger(Jobs.class);
 	private @Context HttpServletRequest request;
+	private ArrayList<String> west = new ArrayList<String>() {{add("CD");add("CDLG");add("CQ");add("DZKD");add("XNCD");add("XNDX");}};
+	private ArrayList<String> east = new ArrayList<String>() {{add("FDU");add("NJU");add("PKU");add("QINGHUA");add("SJ");}};
 	@Autowired
     private JobsMapper jobsDao;
 	@Autowired
@@ -43,6 +48,8 @@ public class Jobs {
 		para.put("start", start);
 		para.put("end", (end-start));
 		para.put("source", source);
+		para.put("WEST", west);
+		para.put("EAST", east);
 		if(jobtype==null||jobtype.equals("null")){
 			jobtype=JobType.ALL.name();
 		}
